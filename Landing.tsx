@@ -43,9 +43,14 @@ const Landing: React.FC<LandingProps> = ({ onVerify }) => {
             <div className="relative z-20 w-full max-w-md m-4 p-8 bg-black/40 backdrop-blur-lg border border-gray-700/50 rounded-2xl shadow-2xl">
                 <div className="text-center">
                     {/* Logo */}
-                    <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-8 tracking-wider" style={{ textShadow: '0 0 25px rgba(34, 211, 238, 0.6)' }}>
+                    <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-4 tracking-wider" style={{ textShadow: '0 0 25px rgba(34, 211, 238, 0.6)' }}>
                         <span className="text-cyan-400">D</span>Shield
                     </h1>
+                    
+                    {/* Tagline */}
+                    <p className="text-gray-300 text-lg mb-8 tracking-widest">
+                        Fortificando sua Presença Digital
+                    </p>
                     
                     {/* Input and Button */}
                     <div className="flex flex-col items-center justify-center gap-4 w-full">
