@@ -196,7 +196,7 @@ const Report: React.FC = () => {
                             </p>
                             <p className="mb-4 bg-red-900/20 border border-red-500/30 p-4 rounded-lg flex items-start space-x-3">
                                <ShieldWarningIcon className="w-8 h-8 text-red-400 flex-shrink-0 mt-1" />
-                               <span>Esta situação representa um <strong className="text-red-400">risco de Alta Criticidade</strong> que afeta a credibilidade, a experiência do usuário e a saúde do domínio perante mecanismos de busca (SEO). A vulnerabilidade subjacente é provavelmente uma falha de Cross-Site Scripting (XSS) Persistente ou uma falha de injeção de código em <span className={!isUnlocked ? "blur-sm select-none" : ""}>{isUnlocked ? originalData.summaryPhrase1 : "contate o auditor para detalhes"}</span>, o que pode levar a um comprometimento total do sistema.</span>
+                               <span>Esta situação representa um <strong className="text-red-400">risco de Alta Criticidade</strong> que afeta a credibilidade, a experiência do usuário e a saúde do domínio perante mecanismos de busca (SEO). A vulnerabilidade subjacente é provavelmente uma falha de Cross-Site Scripting (XSS) Persistente ou uma falha de injeção de código em <span className={!isUnlocked ? "blur-sm select-none" : ""}>{isUnlocked ? originalData.summaryPhrase1 : "contate o auditor para detalhes"}</span>, o que pode levar a um comprometimento total do sistema. Adicionalmente, a injeção pode ser a causa de outros sintomas relatados, como instabilidade no carregamento e o bloqueio de links por extensões de AdBlock, comportamento atípico para um site corporativo.</span>
                             </p>
                             <p>
                                 <strong className="text-cyan-400">Ação Imediata Recomendada:</strong> Isolar o vetor de ataque, <span className={!isUnlocked ? "blur-sm select-none" : ""}>{isUnlocked ? originalData.summaryPhrase2 : "contate o auditor para o plano de ação e detalhes técnicos"}</span> em busca de vulnerabilidades conhecidas.
@@ -227,7 +227,23 @@ const Report: React.FC = () => {
                         </ReportSection>
 
                         <ReportSection title="3. Descobertas e Provas">
-                            <p className="mb-6">Foram encontrados diversos links e termos-chave associados a plataformas de jogos de azar injetados no código-fonte do site. A seguir, uma lista completa das URLs maliciosas identificadas.</p>
+                            <p className="mb-6">Além da injeção de links maliciosos, foi observado que o site apresenta instabilidade intermitente durante o carregamento. Notavelmente, alguns desses links injetados são reconhecidos e bloqueados por extensões de AdBlocker, o que contribui para uma experiência de usuário degradada e levanta suspeitas sobre a integridade geral do conteúdo da página.</p>
+                            <p className="mb-6">Esses problemas são consistentes com as descobertas abaixo, que detalham os elementos maliciosos injetados no código-fonte do site.</p>
+                            
+                            <h4 className="text-xl font-bold text-white mb-3">3.1. Evidência de Injeção no Código-Fonte</h4>
+                            <p className="mb-4">
+                                A análise do código-fonte da página inicial revelou um bloco de HTML injetado, contendo múltiplos links de spam disfarçados. Este bloco é renderizado de forma oculta ou em áreas de baixa visibilidade (como o rodapé) para manipular mecanismos de busca sem alertar o usuário comum. A imagem abaixo é uma captura da injeção encontrada:
+                            </p>
+                            <div className="mb-8 border border-gray-700 rounded-lg overflow-hidden shadow-lg">
+                                <img 
+                                    src="https://i.postimg.cc/hv16wssZ/Screenshot-2025-10-27-at-16-59-04-https-souzabombas-com-br.png" 
+                                    alt="Evidência do código malicioso injetado" 
+                                    className="w-full h-auto"
+                                />
+                            </div>
+
+                            <h4 className="text-xl font-bold text-white mb-3">3.2. Lista Completa de URLs Injetadas</h4>
+                            <p className="mb-6">A seguir, uma lista completa das URLs maliciosas identificadas no bloco de código injetado.</p>
                             
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4 bg-gray-900/50 p-4 rounded-lg border border-gray-700">
                                 {infectedLinks.map((link, index) => (
