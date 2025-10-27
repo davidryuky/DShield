@@ -88,7 +88,32 @@ const Report: React.FC = () => {
     const handleDownloadPdf = () => {
         const reportElement = reportRef.current;
         if (!reportElement) return;
+
         const elementToPrint = reportElement.cloneNode(true) as HTMLElement;
+
+        // --- Watermark Injection ---
+        elementToPrint.style.position = 'relative'; 
+        elementToPrint.style.overflow = 'hidden'; 
+
+        const watermark = document.createElement('div');
+        watermark.innerText = 'DSHIELD';
+        Object.assign(watermark.style, {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%) rotate(-45deg)',
+            fontSize: '15vw',
+            fontWeight: 'bold',
+            color: 'rgba(255, 255, 255, 0.04)',
+            pointerEvents: 'none',
+            zIndex: '1000',
+            textAlign: 'center',
+            width: '141.42%', // Sqrt(2) * 100% to cover rotated area
+            letterSpacing: '1rem',
+        });
+        elementToPrint.prepend(watermark);
+        // --- End of Watermark Injection ---
+
         const printContainer = document.createElement('div');
         printContainer.style.position = 'absolute';
         printContainer.style.left = '-9999px';
@@ -96,6 +121,7 @@ const Report: React.FC = () => {
         printContainer.style.width = `${reportElement.offsetWidth}px`;
         printContainer.appendChild(elementToPrint);
         document.body.appendChild(printContainer);
+
         const pdfWidth = elementToPrint.scrollWidth;
         const pdfHeight = elementToPrint.scrollHeight;
         const opt = {
@@ -160,7 +186,7 @@ const Report: React.FC = () => {
                             <div><p className="text-gray-400">Cliente:</p><p className="text-lg text-white font-semibold">Cliente Souza Bombas</p></div>
                             <div><p className="text-gray-400">Alvo Principal:</p><code className="text-lg text-green-400 bg-gray-700/50 px-2 py-1 rounded inline-block">https://souzabombas.com.br/</code></div>
                             <div><p className="text-gray-400">Data de Emissão:</p><p className="text-lg text-white">27 de Outubro de 2025</p></div>
-                            <div><p className="text-gray-400">ID do Relatório:</p><p className="text-lg text-white">SPT-2025-XSS-001</p></div>
+                            <div><p className="text-gray-400">ID do Relatório:</p><p className="text-lg text-white">SPT-2025-XSS-108</p></div>
                             <div className="sm:col-span-2 flex items-center space-x-2"><p className="text-gray-400">Criticidade Geral:</p><RiskBadge level="high" /></div>
                         </div>
 
