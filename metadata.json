@@ -1,0 +1,5 @@
+{
+  "name": "Pentest Report Generator",
+  "description": "A professional and stylish pentest report page with a hacker-themed aesthetic. It displays vulnerability analysis and mitigation recommendations, and allows exporting the report as a PDF.",
+  "requestFramePermissions": []
+}
